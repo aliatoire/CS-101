@@ -1,0 +1,126 @@
+---
+title: "RWorksheet_Perez#3b"
+output: pdf_document
+date: "2024-10-03"
+---
+
+1. Create a data frame using the table below.
+
+a. Write the codes.
+
+``` {r}
+personal_info <- data.frame(Respondents = 1:20, Sex=c("Female", "Female", "Male", "Female","Female","Female","Female","Female","Female","Female", "Male","Female","Female","Female","Female","Female","Female","Female", "Male", "Female"), Fathers_Occupation = c("Farmer", "Others", "Others", "Others", "Farmer", "Driver", "Others", "Farmer", "Farmer", "Farmer", "Others", "Driver", "Farmer", "Others", "Others", "Farmer", "Others", "Farmer", "Driver", "Farmer"), Persons_at_Home = c(5, 7, 3, 8, 5, 9, 6, 7, 8, 4, 7, 5, 4, 7, 8, 8, 3, 11, 7, 6), Siblings_at_School = c(6, 4, 4, 1, 2, 1, 5, 3, 1, 2, 3, 2, 5, 5, 2, 1, 2, 5, 3, 2), Types_of_Houses = c("Wood", "Semi-concrete", "Concrete", "Wood", "Wood", "Concrete", "Concrete", "Wood", "Semi-concrete", "Concrete", "Semi-concrete", "Concrete", "Semi-concrete", "Semi-concrete", "Concrete", "Concrete", "Concrete", "Concrete", "Concrete", "Semi-concrete"))
+personal_info
+```
+
+b. Describe the data. Get the structure or the summary of the data.
+
+The data frame consists pf information about a respondent's sex, their father's occupation, the number of persons at home, siblings at school, and the types of house they live in.   
+```{r}
+str(personal_info)
+```
+```{r}
+summary(personal_info)
+```  
+c. Is the mean number of siblings attending is 5? 
+```{r}
+mean(personal_info[ ,5])
+```
+d. Extract the 1st two rows and then all the columns using the subsetting functions.
+Write the codes and its output.
+```{r}
+subset(personal_info[1:2, ])
+```
+ 
+
+e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+```{r}
+personal_info[c(3,5), c(2,4)]
+```
+
+f. Select the variable types of houses then store the vector that results as types_houses.
+Write the codes.
+```{r}
+types_houses <- personal_info$Types_of_Houses
+types_houses
+```
+
+g. Select only all Males respondent that their father occupation was farmer. Write the
+codes and its output.
+```{r}
+subset(personal_info, Sex == "Male" & Fathers_Occupation == "Farmer")
+```
+h. Select only all females respondent that have greater than or equal to 5 number of
+siblings attending school. Write the codes and its outputs.
+```{r}
+subset(personal_info, Sex == "Female" & Siblings_at_School >= 5)
+```
+
+2. Write a R program to create an empty data frame. Using the following codes:
+```{r}
+df = data.frame(Ints=integer(),
+Doubles=double(), Characters=character(), 
+Logicals=logical(),
+Factors=factor(), 
+stringsAsFactors=FALSE)
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+
+a. Describe the results.
+
+The output shows  the structure of the empty data frame that was made from the code given. Since it is empty, the result is NULL. However, it includes different types. These types are integers, doubles, characters, logicals, and factors.
+
+3. Create a .csv file of this. Save it as HouseholdData.csv.
+
+a. Import the csv file into the R environment. Write the codes.
+```{r}
+household_data <- read.csv("/cloud/project/HouseholdData.csv")
+household_data
+```
+
+b. Convert the Sex into factor using factor() function and change it into integer.[Legend:
+Male = 1 and Female = 2]. Write the R codes and its output.
+```{r}
+sex_factor <- factor(household_data$Sex)
+household_data$Sex <- factor(sex_factor, labels = c(2, 1))
+household_data
+```
+
+c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood
+= 1; Concrete = 2; Semi-Concrete = 3]. Write the R codes and its output.
+```{r}
+house_factor <- factor(household_data$Types.of.Houses)
+household_data$Types.of.Houses <- factor(house_factor, labels = c(2, 3, 1))
+household_data
+```
+d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What
+is the R code and its output?
+```{r}
+father_occupation <- factor(household_data$Fathers.Occupation)
+household_data$Fathers.Occupation <- factor(father_occupation, labels = c("Farmer", "Driver", "Others"))
+household_data
+```
+
+
+e. Select only all females respondent that has a father whose occupation is driver. Write
+the codes and its output.
+```{r}
+subset(household_data, Sex == 2 & Fathers.Occupation == "Driver")
+
+```
+
+
+f. Select the respondents that have greater than or equal to 5 number of siblings attending
+school. Write the codes and its output.
+```{r}
+subset(household_data, Siblings.at.School >= 5)
+
+```
+
+4. Interpret the graph.
+
+The bar graph displays the Sentiments of Tweets per Day over a series of dates wherein the bars represent the count of tweets with three different sentiments, namely: Negative (red), Neutral (yellow) and Positive (blue). The x-axis contains the dates July 14, 2020 to July 21, 2020 while the y-axis contains the number of tweets with the particular sentiment for the corresponding date. 
+
+The sentiment trends over time show that negative sentiment (red bars) dominates most dates, consistently having the highest count compared to other sentiments, with particularly large spikes on July 15 and 20, 2020. Neutral sentiment (yellow bars) remains relatively consistent throughout the period, with moderate tweet counts that do not fluctuate as dramatically as negative or positive sentiments. Positive sentiment (blue bars) shows more variability, generally lower than negative sentiment, but with a notable increase on July 21, 2020, indicating a shift toward a more positive outlook. The spikes in negative sentiment on July 15 and 20 suggest events or discussions triggering this response, while the rise in positive tweets on July 21 may indicate a change in conversation or a reaction to events in a more favorable direction.
+
